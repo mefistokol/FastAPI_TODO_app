@@ -14,7 +14,7 @@ def get_db():
     try:
         yield db
     except Exception:
-        db.rollbacj()
+        db.rollback()
         raise
     finally:
         db.close()
