@@ -6,7 +6,7 @@
 
 | Компонент | Технологии |
 |-----------|------------|
-| **Backend** | Python 3.12, FastAPI, SQLAlchemy 2, Pydantic v2, Uvicorn |
+| **Backend** | Python 3.11, FastAPI, SQLAlchemy 2, Pydantic v2, Uvicorn |
 | **Frontend** | React 19, Axios, Nginx |
 | **База данных** | PostgreSQL 16 |
 | **Кэш** | Redis 8 |
@@ -25,7 +25,7 @@
 ```
 todo/
 ├── docker-compose.yml          # Оркестрация всех сервисов
-├── .env                        # Переменные окружения (пароли БД и Redis)
+├── .env                        # Переменные окружения (пароль БД)
 │
 ├── todo-app-back/              # Backend (FastAPI)
 │   ├── Dockerfile
@@ -61,7 +61,6 @@ todo/
 
    ```env
    POSTGRES_PASSWORD=your_postgres_password
-   REDIS_PASSWORD=your_redis_password
    ```
 
 3. Запустите все сервисы:
@@ -134,6 +133,5 @@ Frontend dev-сервер запустится на http://localhost:3000.
 | Переменная | Описание | Значение по умолчанию |
 |------------|----------|-----------------------|
 | `POSTGRES_PASSWORD` | Пароль PostgreSQL | — |
-| `REDIS_PASSWORD` | Пароль Redis | — |
 | `DATABASE_URL` | Строка подключения к БД | `postgresql+psycopg://postgres:password@localhost:5432/tododb` |
 | `REDIS_URL` | Строка подключения к Redis | `redis://localhost:6379/0` |

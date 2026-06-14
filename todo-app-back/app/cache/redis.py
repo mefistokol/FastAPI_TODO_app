@@ -1,7 +1,7 @@
 import json
 from functools import lru_cache
 from typing import Any
-from redis import Redis
+from redis.asyncio import Redis
 
 
 
@@ -10,16 +10,16 @@ class RedisCachedBackend:
         self.redis = Redis.from_url(redis_url, decode_responses=True)
         self.cached_ttl_seconds = cached_ttl_seconds
 
-    def set(self, key: str, value: Any) -> None:
-        self.redis.set(key, json.dumps(value), ex=self.cached_ttl_seconds)
+    async def set(self, key: str, value: Any) -> None:
+        await self.redis.set(key, json.dumps(value), ex=self.cached_ttl_seconds)
     
-    def get(self, key: str) -> Any | None:
-        value = self.redis.get(key)
+    async def get(self, key: str) -> Any | None:
+        value = await self.redis.get(key)
         if value is not None:
             return json.loads(value)
 
-    def delete(self, key: str) -> None:
-        self.redis.delete(key)
+    async def delete(self, key: str) -> None:
+        await self.redis.delete(key)
 
 
 @lru_cache
